@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "name": "Anonymous Vote Database",
+  "tables": [
+    {
+      "id": 1,
+      "name": "Votes",
+      "order": 1,
+      "fields": [
+        {
+          "id": 1,
+          "name": "ID",
+          "type": "number",
+          "primary": true,
+          "number_decimal_places": 0,
+          "number_negative": false
+        },
+        {
+          "id": 2,
+          "name": "Question",
+          "type": "text",
+          "primary": false,
+          "text_default": ""
+        },
+        {
+          "id": 3,
+          "name": "Max Selections",
+          "type": "number",
+          "primary": false,
+          "number_decimal_places": 0,
+          "number_negative": false,
+          "number_default": 1
+        },
+        {
+          "id": 4,
+          "name": "Created At",
+          "type": "date",
+          "primary": false,
+          "date_include_time": true,
+          "date_time_format": "ISO"
+        },
+        {
+          "id": 5,
+          "name": "UUID",
+          "type": "text",
+          "primary": false,
+          "text_default": ""
+        }
+      ],
+      "rows": []
+    },
+    {
+      "id": 2,
+      "name": "Options",
+      "order": 2,
+      "fields": [
+        {
+          "id": 1,
+          "name": "ID",
+          "type": "number",
+          "primary": true,
+          "number_decimal_places": 0,
+          "number_negative": false
+        },
+        {
+          "id": 2,
+          "name": "Vote",
+          "type": "link_row",
+          "primary": false,
+          "link_row_table_id": 1,
+          "link_row_related_field_id": null
+        },
+        {
+          "id": 3,
+          "name": "Option Text",
+          "type": "text",
+          "primary": false,
+          "text_default": ""
+        },
+        {
+          "id": 4,
+          "name": "Count",
+          "type": "number",
+          "primary": false,
+          "number_decimal_places": 0,
+          "number_negative": false,
+          "number_default": 0
+        }
+      ],
+      "rows": []
+    },
+    {
+      "id": 3,
+      "name": "Responses",
+      "order": 3,
+      "fields": [
+        {
+          "id": 1,
+          "name": "ID",
+          "type": "number",
+          "primary": true,
+          "number_decimal_places": 0,
+          "number_negative": false
+        },
+        {
+          "id": 2,
+          "name": "Vote",
+          "type": "link_row",
+          "primary": false,
+          "link_row_table_id": 1,
+          "link_row_related_field_id": null
+        },
+        {
+          "id": 3,
+          "name": "Selected Options",
+          "type": "long_text",
+          "primary": false
+        },
+        {
+          "id": 4,
+          "name": "Submitted At",
+          "type": "date",
+          "primary": false,
+          "date_include_time": true,
+          "date_time_format": "ISO"
+        }
+      ],
+      "rows": []
+    }
+  ]
+} 

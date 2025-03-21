@@ -4,6 +4,11 @@ import pandas as pd
 import requests
 from datetime import datetime
 import json
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Page configuration
 st.set_page_config(
@@ -19,7 +24,10 @@ if "current_vote_id" not in st.session_state:
     st.session_state.current_vote_id = None
 
 # Baserow API configuration
-BASEROW_API_URL = "https://api.baserow.io/api/database/rows/table/"
+# First check if URL is in environment variables, then in secrets, then use default
+BASEROW_API_URL = os.getenv("BASEROW_API_URL", 
+                          st.secrets.get("baserow_api_url", 
+                                       "https://api.baserow.io/api/database/rows/table/"))
 BASEROW_API_TOKEN = st.secrets["baserow_api_token"]
 VOTES_TABLE_ID = st.secrets["votes_table_id"]
 OPTIONS_TABLE_ID = st.secrets["options_table_id"]

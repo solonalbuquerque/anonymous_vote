@@ -11,6 +11,7 @@ Usage:
 1. Create a .env file with the following content:
    BASEROW_API_TOKEN=your_api_token
    BASEROW_DATABASE_ID=your_database_id
+   BASEROW_API_URL=your_baserow_api_url (optional, defaults to https://api.baserow.io/api/database)
 
 2. Run this script:
    python setup_baserow.py
@@ -22,7 +23,7 @@ load_dotenv()
 # Baserow API configuration
 API_TOKEN = os.getenv("BASEROW_API_TOKEN")
 DATABASE_ID = os.getenv("BASEROW_DATABASE_ID")
-BASE_URL = "https://api.baserow.io/api/database"
+BASE_URL = os.getenv("BASEROW_API_URL", "https://api.baserow.io/api/database")
 
 headers = {
     "Authorization": f"Token {API_TOKEN}",
@@ -152,11 +153,15 @@ def create_secrets_file(votes_table_id, options_table_id, responses_table_id):
     if not os.path.exists(secrets_dir):
         os.makedirs(secrets_dir)
     
+    # Get the API URL for the rows endpoint from environment variable or use the default
+    api_url = os.getenv("BASEROW_API_URL", "https://api.baserow.io/api/database/rows/table/")
+    
     secrets_content = f"""# Baserow API Configuration
 baserow_api_token = "{API_TOKEN}"
 votes_table_id = "{votes_table_id}"
 options_table_id = "{options_table_id}"
 responses_table_id = "{responses_table_id}"
+baserow_api_url = "{api_url}"
 """
     
     with open(secrets_file, "w") as f:

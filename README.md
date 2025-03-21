@@ -18,26 +18,38 @@ A simple anonymous voting system built with Streamlit and Baserow.
 
 2. **Baserow Setup**:
    - Create an account at [Baserow](https://baserow.io/)
-   - Create a new database with the following tables:
+   - Set up the database tables by one of these methods:
+     
+     **Option 1: Import JSON Template**
+     - Go to your Baserow dashboard
+     - Click "Import" and select the `baserow_template.json` file
+     - This will create all the required tables with the correct structure
+     
+     **Option 2: Run Setup Script**
+     - Create a `.env` file based on `.env.example`
+     - Run `python setup_baserow.py`
+     
+     **Option 3: Manual Creation**
+     - Create a new database with the following tables:
 
-   **Votes Table**:
-   - id (Auto-increment)
-   - question (Text)
-   - max_selections (Number)
-   - created_at (Date/Time)
-   - uuid (Text)
+     **Votes Table**:
+     - id (Auto-increment)
+     - question (Text)
+     - max_selections (Number)
+     - created_at (Date/Time)
+     - uuid (Text)
 
-   **Options Table**:
-   - id (Auto-increment)
-   - vote (Link to Votes Table)
-   - option_text (Text)
-   - count (Number)
+     **Options Table**:
+     - id (Auto-increment)
+     - vote (Link to Votes Table)
+     - option_text (Text)
+     - count (Number)
 
-   **Responses Table**:
-   - id (Auto-increment)
-   - vote (Link to Votes Table)
-   - selected_options (Long Text - stores JSON)
-   - submitted_at (Date/Time)
+     **Responses Table**:
+     - id (Auto-increment)
+     - vote (Link to Votes Table)
+     - selected_options (Long Text - stores JSON)
+     - submitted_at (Date/Time)
 
 3. **Configure Baserow API**:
    - Get your Baserow API token
@@ -48,6 +60,7 @@ A simple anonymous voting system built with Streamlit and Baserow.
      options_table_id = "YOUR_OPTIONS_TABLE_ID"
      responses_table_id = "YOUR_RESPONSES_TABLE_ID"
      ```
+   - Optionally, set the `BASEROW_API_URL` environment variable if you're using a self-hosted Baserow instance
 
 ## Running the Application
 
